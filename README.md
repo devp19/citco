@@ -14,7 +14,7 @@ data visualizations.
 >Hamza Yalcin  
 >Sadiksha Dahal  
 >Neeti Dhiman  
->Jonathan Thomas  
+>Jonathan Thomas   
 >Dev Patel  
 
 ---
