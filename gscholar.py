@@ -88,7 +88,7 @@ grouped = df.groupby(["Name", "Fiscal Year"]).first().reset_index()
 print(f"Total unique Name/Fiscal Year combinations: {len(grouped)}")
 
 CHUNK_SIZE = 25
-chunk_start = 350  # change this part on reruns -->>>>>> terminal will say next chunk value put that number here pls!!!! (e.g., 25, 50, 75...)
+chunk_start = 375 # change this part on reruns -->>>>>> terminal will say next chunk value put that number here pls!!!! (e.g., 25, 50, 75...)
 chunk_end = min(chunk_start + CHUNK_SIZE, len(grouped))
 chunk = grouped.iloc[chunk_start:chunk_end]
 print(f"Processing chunk from {chunk_start} to {chunk_end-1} ({len(chunk)} entries)")
