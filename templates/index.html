@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CITCO Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+  <header>
+    C I T C O
+  </header>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Filters / Options</h3>
+
+      <label for="university-select">University:</label>
+      <select id="university-select">
+        <option value="all">All Universities</option>
+        {% for university in universities %}
+        <option value="{{ university }}">{{ university }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="timeframe-select">Time Frame:</label>
+      <select id="timeframe-select">
+        <option value="all">All Years</option>
+        <option value="1y">Last Year</option>
+        <option value="3y">Last 3 Years</option>
+        <option value="6y">Last 6 Years</option>
+        <option value="10y">Last 10 Years</option>
+      </select>
+
+      <div class="button-group">
+        <button id="change-chart-btn">Change Chart</button>
+        <button id="fullscreenBtn">&#x26F6; Fullscreen</button>
+      </div>
+    </div>
+
+    <div class="main-content" id="chartArea">
+      <div class="chart-header">
+        <h2 id="chart-title">Citation Count vs Grant Amount</h2>
+        <button id="exitFullscreenBtn" class="exit-fullscreen-btn" style="display: none;">&#x2716; Exit Fullscreen</button>
+      </div>
+      
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">Total Citations</div>
+          <div class="stat-value" id="total-citations">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Grants</div>
+          <div class="stat-value" id="total-grants">$0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Citations</div>
+          <div class="stat-value" id="avg-citations">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Grant</div>
+          <div class="stat-value" id="avg-grants">$0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Researchers</div>
+          <div class="stat-value" id="researchers-count">0</div>
+        </div>
+      </div>
+      
+      <div class="chart-container" id="chart-container">
+        <div id="loading-overlay" class="loading-overlay">
+          <div class="loading-spinner"></div>
+          <span>Loading graph...</span>
+        </div>
+        <img id="graph-img" src="" alt="Graph">
+      </div>
+
+      <!-- Open Box Button (Positioned at bottom left) -->
+      <button id="openBoxBtn">ℹ️</button>
+
+      <!-- Box to display when button is clicked -->
+      <div class="box" id="box" style="display: none;">
+        <p> This project investigates whether there's a correlation between a 
+          researcher's citation count and the funding they receive from NSERC's
+          Discovery Grant (DG) program. 
+          We focused on Canadian computer science researchers, gathering data
+          from NSERC's grant database and citation records from Google Scholar.
+          Using this information, we created visualizations to explore trends
+          between citation activity and grant amounts over the past 15 years.
+          Our analysis leads to the conclusion that measurable research impact 
+          (does or doesnt) relate to funding decisions, and and that citation
+          metrics (do or dont) offer meaningful insight into grant outcomes.
+        </p>
+        <button id="close-box-btn">X</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="color-toggle-btn" alt="change colour scheme" onclick="cycleThemes()">
+    🎨
+  </button>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+    const themes = [
+      {
+        bg: "#ffffff",
+        text: "#000000",
+        accents: ["#ccc5b9", "#403d39", "#252422", "#F2EAD3", "#eb5e28"]
+      },
+      {
+        bg: "#fffdf6",
+        text: "#000000",
+        accents: ["#669bbc", "#c1121f", "#003049", "#fdf0d5", "#780000"]
+      },
+      {
+        bg: "#ffffff",
+        text: "#000000",
+        accents: ["#C1492E", "#2a9d8f", "#D88C00", "#f4a261", "#264653"]
+      }
+    ];
+    
+    let themeIndex = 0;
+    
+    function cycleThemes() {
+      themeIndex = (themeIndex + 1) % themes.length;
+      const theme = themes[themeIndex];
+      document.documentElement.style.setProperty('--bg-color', theme.bg);
+      document.documentElement.style.setProperty('--text-color', theme.text);
+      theme.accents.forEach((color, i) => {
+        document.documentElement.style.setProperty(`--accent-${i + 1}`, color);
+      });
+    }
+
+    // Info box functionality
+    const openBoxBtn = document.getElementById("openBoxBtn");
+    const box = document.getElementById("box");
+    const closeBoxBtn = document.getElementById("close-box-btn");
+    const allButtons = document.querySelectorAll("button:not(#close-box-btn)");
+    const selects = document.querySelectorAll("select");
+
+    openBoxBtn.addEventListener("click", () => {
+      box.style.display = "block";
+      allButtons.forEach(button => {
+        if (button !== closeBoxBtn) {
+          button.disabled = true;
+        }
+      });
+      selects.forEach(select => {
+        select.disabled = true;
+      });
+      openBoxBtn.classList.add("hidden"); 
+      closeBoxBtn.style.display = "block"; 
+    });
+
+    closeBoxBtn.addEventListener("click", () => {
+      box.style.display = "none";
+   
+      allButtons.forEach(button => {
+        if (button !== closeBoxBtn) {
+          button.disabled = false;
+        }
+      });
+      selects.forEach(select => {
+        select.disabled = false;
+      });
+      openBoxBtn.classList.remove("hidden"); 
+      closeBoxBtn.style.display = "none"; 
+    });
+  </script>
+</body>
+</html>
