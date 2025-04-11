@@ -41,7 +41,9 @@ depending on the specifications provided when downloading the dataset.</em></str
 - HTML/CSS (User Interface)
 - Libraries:
 
-  >Pandas  
+  >Pandas
+  >numpy
+  >Matplitlib
   >BeautifulSoup  
   >urlib.prase  
   >requests  
