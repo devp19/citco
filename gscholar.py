@@ -233,7 +233,7 @@ for index, row in chunk.iterrows():
             processed_names.add(original_name_year_key)
             
         except Exception as e2:
-            print(f"second attemp failed for {name}: {str(e2)}")
+            print(f"second attempt failed for {name}: {str(e2)}")
             
             with open(output_file, "a", newline='', encoding="utf-8") as f:
                 writer = csv.writer(f)
