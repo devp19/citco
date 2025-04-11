@@ -95,7 +95,7 @@ def create_citation_vs_grants_graph(df):
         p = np.poly1d(z)
         ax.plot(df["CitationCount"], p(df["CitationCount"]), linestyle='--', color=secondary_color, linewidth=2, alpha=0.8)
     
-    ax.set_xlabel("Citation Count (5-Year Window)", color=secondary_color, fontweight='bold')
+    ax.set_xlabel("Citation Count (By Year)", color=secondary_color, fontweight='bold')
     ax.set_ylabel("Grant Amount ($)", color=secondary_color, fontweight='bold')
     ax.set_title("Citation Count vs Grant Amount", color=secondary_color, fontsize=14, fontweight='bold')
     
@@ -266,12 +266,8 @@ try:
         "University of Alberta", 
         "University of New Brunswick", 
         "University of Waterloo", 
-        "Virginia Tech", 
-        "West Virginia University", 
         "University of Victoria", 
         "University of Toronto", 
-        "Lawrence Berkeley National Laboratory", 
-        "ÉTS (U. of Quebec)", 
         "University of Guelph", 
         "Brock University"
     ]

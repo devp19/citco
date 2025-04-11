@@ -79,7 +79,7 @@ def create_citation_vs_grants_graph(df):
         p = np.poly1d(z)
         ax.plot(df["CitationCount"], p(df["CitationCount"]), "r--", alpha=0.8)
     
-    ax.set_xlabel("Citation Count (5-Year Window)")
+    ax.set_xlabel("Citation Count (By Years)")
     ax.set_ylabel("Grant Amount ($)")
     ax.set_title("Citation Count vs Grant Amount")
     
