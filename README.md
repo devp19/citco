@@ -1,11 +1,25 @@
 # Project CITCO (NSERC Discovery Grant Analysis)
-CPS406 (Software Engineering) | Sprint 3 Executable Code for Citco (NSERC DG)  
+CPS406 (Software Engineering) | Sprint 3 Executable Code for Citco (NSERC DG)
 
-Citco is a web application that displays the correlation between individual
+### Project Overview
+
+Citco is a web application that investigates whether there's a correlation between individual
 researchers’ citation counts and the amount of money they have been granted through their respective
-Discovery Grants through the Natural Sciences and Engineering Research Council of Canada
-(NSERC). Users will be able to filter and show the gathered information with a variety of graph and
-data visualizations.
+Discovery Grants (DGs) through the Natural Sciences and Engineering Research Council of Canada
+(NSERC). Users will be able to filter and display the gathered information using a variety of graphs
+and data visualizations, enhanced with customizable colour schemes. 
+
+Our primary focus is on Canadian computer science researchers. We sourced data from NSERC’s grant
+database and Google Scholar’s citation records, enabling us to create visualizations that examine 
+trends in citation activity and grant amounts over the past 15 years.
+
+Our analysis reveals that, overall, there is little evidence of a strong relationship between 
+DG amounts and citation counts, as shown by a <em>Pearson correlation coefficient</em> of 
+approximately <em>0.3</em>, a value near zero. However, when examining the data at a more granular 
+level, we find that citation metrics can offer meaningful insights into funding outcomes at specific universities.
+
+<strong><em>*It's important to consider dataset filters directly from NSERC as results may vary slightly 
+depending on the specifications provided when downloading the dataset.</em></strong>
 
 ---
 
@@ -15,7 +29,22 @@ data visualizations.
 >Sadiksha Dahal  
 >Neeti Dhiman  
 >Jonathan Thomas   
->Dev Patel  
+>Dev Patel
+
+---
+
+### Technology Stack
+
+- Python (Webscraping and Data Visualization)
+- Flask (Rendering Dashboard)
+- JavaScript (Functionality)
+- HTML/CSS (User Interface)
+- Libraries:
+
+  >Pandas  
+  >BeautifulSoup  
+  >urlib.prase  
+  >requests  
 
 ---
 
@@ -34,6 +63,13 @@ data visualizations.
 
 ---
 
-<img width="1470" alt="Screenshot 2025-04-10 at 10 49 22 PM" src="https://github.com/user-attachments/assets/95b3b557-29d6-4b8f-8019-7bab718bb1bd" />
-<img width="1469" alt="Screenshot 2025-04-10 at 10 50 06 PM" src="https://github.com/user-attachments/assets/6fe0373d-6ef0-47e2-9b0c-954d931f1bec" />
+### Example of Usage
 
+**Filter: All years at all universities**
+
+<img width="1469" alt="Screenshot 2025-04-10 at 10 50 06 PM" src="https://github.com/user-attachments/assets/6fe0373d-6ef0-47e2-9b0c-954d931f1bec" />  
+
+  
+**Filter: All years at Waterloo University**
+
+<img width="1470" alt="Screenshot 2025-04-10 at 10 49 22 PM" src="https://github.com/user-attachments/assets/95b3b557-29d6-4b8f-8019-7bab718bb1bd" />
