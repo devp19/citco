@@ -35,3 +35,5 @@ data visualizations.
 ---
 
 <img width="1470" alt="Screenshot 2025-04-10 at 10 49 22 PM" src="https://github.com/user-attachments/assets/95b3b557-29d6-4b8f-8019-7bab718bb1bd" />
+<img width="1469" alt="Screenshot 2025-04-10 at 10 50 06 PM" src="https://github.com/user-attachments/assets/6fe0373d-6ef0-47e2-9b0c-954d931f1bec" />
+
